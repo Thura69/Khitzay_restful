@@ -7,10 +7,13 @@
     "build": "netlify deploy --prod"
   },
   "dependencies": {
+    "@netlify/functions": "^2.4.1",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "netlify-cli": "^12.7.2",
     "netlify-lambda": "^2.0.15",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "typescript": "^5.3.3"
   },
   "keywords": [],
   "author": "",
