@@ -1,25 +1,30 @@
 import express from 'express'
 import 'dotenv/config';
 import serverless from 'serverless-http';
-import { connect } from '../utils/connect';
 import { routes } from '../routes';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import { connect } from '../utils/connect';
+
+
+connect();
 
 const app = express();
+app.use(express.json());
+app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(morgan('dev'));
 const router = express.Router();
-const port = process.env.PORT;
 
 router.get('/', (req, res) => {
   res.send('App is running..');
 });
 
+//routes
+ routes(router);
 
 app.use('/.netlify/functions/api', router);
 module.exports.handler = serverless(app);
 
 
-
-app.listen(port, () => {
-  routes(router);
-  connect();
-  console.log(`server is running on http://http://127.0.0.1:${port}`);
-});
+ 
